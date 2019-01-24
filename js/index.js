@@ -39,7 +39,43 @@ let backgrounds = [{
       ],
       [
         6, 10,
-        0, 16
+        0, 13
+      ]
+    ]
+  },
+  {
+    "name": "ege",
+    "space": [
+      [
+        0, 16,
+        13, 14
+      ]
+    ]
+  },
+  {
+    "name": "water-ege",
+    "space": [
+      [
+        0, 16,
+        14, 15
+      ]
+    ]
+  },
+  {
+    "name": "water",
+    "space": [
+      [
+        0, 16,
+        15, 16
+      ]
+    ]
+  },
+  {
+    "name": "boat",
+    "space": [
+      [
+        4, 5,
+        14, 15
       ]
     ]
   }
@@ -102,6 +138,32 @@ class new_tile {
     this.tilemap.set(name, tileblock)
   }
 
+  // ----- CREAT OBJECT -----
+
+  object(name, Tx, Ty, Tw, Th) {
+    this.name = name;
+    this.Tx = Tx * blockSize;
+    this.Ty = Ty * blockSize;
+
+    this.Tw = Tw * blockSize;
+    this.Th = Th * blockSize;
+
+    const tileblock = document.createElement("canvas")
+    tileblock.width = this.Tw;
+    tileblock.height = this.Th;
+    tileblock
+      .getContext("2d")
+      .drawImage(
+        this.image,
+        this.Tx, this.Ty,
+        this.Tw, this.Th,
+
+        0, 0,
+        this.Tw, this.Th
+      )
+    this.tilemap.set(name, tileblock)
+  }
+
   // ----- DRAW TILE -----
 
   draw(name, context, x, y) {
@@ -130,6 +192,10 @@ loadImage('img/RPG_path.png').then(image => {
 
   tiles.tile("grass", 1, 11);
   tiles.tile("stone", 1, 1);
+  tiles.tile("ege", 1, 12);
+  tiles.tile("water-ege", 1, 13);
+  tiles.tile("water", 3, 10);
+  tiles.object("boat", 0, 14, 4, 2);
 
   // ----- START PLACING TILE'S -----
 

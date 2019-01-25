@@ -5,7 +5,8 @@ let backgrounds = [{
         0, 16,
         0, 16
       ]
-    ]
+    ],
+    "overlay": false
   },
   {
     "name": "stone",
@@ -22,7 +23,8 @@ let backgrounds = [{
         6, 10,
         0, 13
       ]
-    ]
+    ],
+    "overlay": true
   },
   {
     "name": "ege",
@@ -31,7 +33,8 @@ let backgrounds = [{
         0, 16,
         13, 14
       ]
-    ]
+    ],
+    "overlay": false
   },
   {
     "name": "water-ege",
@@ -40,7 +43,8 @@ let backgrounds = [{
         0, 16,
         14, 15
       ]
-    ]
+    ],
+    "overlay": false
   },
   {
     "name": "water",
@@ -49,7 +53,8 @@ let backgrounds = [{
         0, 16,
         15, 16
       ]
-    ]
+    ],
+    "overlay": true
   },
   {
     "name": "boat",
@@ -58,6 +63,7 @@ let backgrounds = [{
         4, 5,
         14, 15
       ]
-    ]
+    ],
+    "overlay": false
   }
 ]

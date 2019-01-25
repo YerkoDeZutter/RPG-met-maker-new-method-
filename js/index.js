@@ -1,3 +1,4 @@
+
 // ----- LOAD SPRITE SET -----
 
 function loadImage(url) {
@@ -13,73 +14,6 @@ function loadImage(url) {
 
 
 
-
-
-// ----- TILE PLACES -----
-
-let backgrounds = [{
-    "name": "grass",
-    "space": [
-      [
-        0, 16,
-        0, 16
-      ]
-    ]
-  },
-  {
-    "name": "stone",
-    "space": [
-      [
-        3, 13,
-        3, 13
-      ],
-      [
-        0, 16,
-        6, 10
-      ],
-      [
-        6, 10,
-        0, 13
-      ]
-    ]
-  },
-  {
-    "name": "ege",
-    "space": [
-      [
-        0, 16,
-        13, 14
-      ]
-    ]
-  },
-  {
-    "name": "water-ege",
-    "space": [
-      [
-        0, 16,
-        14, 15
-      ]
-    ]
-  },
-  {
-    "name": "water",
-    "space": [
-      [
-        0, 16,
-        15, 16
-      ]
-    ]
-  },
-  {
-    "name": "boat",
-    "space": [
-      [
-        4, 5,
-        14, 15
-      ]
-    ]
-  }
-]
 
 
 const blockSize = 32;
@@ -221,3 +155,32 @@ function drawTiles(background, context, tiles) {
     }
   })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function MakeGrid(){
+  for(var i = 0 ; i < canvas.height/blockSize ; i++){
+    for(var j = 0 ; j < canvas.width/blockSize ; j++){
+      c.strokeRect(i*blockSize, j*blockSize, blockSize, blockSize);
+      c.fillText("  " + i, i*blockSize, j*blockSize-20);
+      c.fillText("  " + j, i*blockSize, j*blockSize);
+      c.font = "15px Arial";
+    }
+  }
+}
+
+// setTimeout(MakeGrid, 100);

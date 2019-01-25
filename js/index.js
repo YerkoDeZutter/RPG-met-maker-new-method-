@@ -176,8 +176,8 @@ function MakeGrid(){
   for(var i = 0 ; i < canvas.height/blockSize ; i++){
     for(var j = 0 ; j < canvas.width/blockSize ; j++){
       c.strokeRect(i*blockSize, j*blockSize, blockSize, blockSize);
-      c.fillText("  " + i, i*blockSize, j*blockSize-20);
-      c.fillText("  " + j, i*blockSize, j*blockSize);
+      c.fillText("  " + i, i*blockSize, (j*blockSize-20)+blockSize);
+      c.fillText("  " + j, i*blockSize, (j*blockSize)+blockSize);
       c.font = "15px Arial";
     }
   }

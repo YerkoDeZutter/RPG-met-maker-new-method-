@@ -170,20 +170,27 @@ loadImage('img/RPG_path.png').then(image => {
 function drawTiles(background, context, tiles) {
   if (background.overlay == true) {
     var curMatrix = creatMatrix(16, 16);
-  }
-  background.space.forEach(([x1, x2, y1, y2]) => {
-    for (var x = x1; x < x2; x++) {
-      for (var y = y1; y < y2; y++) {
-        if (background.overlay == true) {
+
+    background.space.forEach(([x1, x2, y1, y2]) => {
+      for (var x = x1; x < x2; x++) {
+        for (var y = y1; y < y2; y++) {
           curMatrix[y][x] = 1;
+          tiles.drawTile(background.name, context, x, y);
         }
-        tiles.drawTile(background.name, context, x, y);
       }
-    }
-  })
-  if (background.overlay == true) {
+    })
     tiles.egemap.set(background.name, curMatrix)
     console.log(tiles.egemap);
+    
+  } else {
+
+    background.space.forEach(([x1, x2, y1, y2]) => {
+      for (var x = x1; x < x2; x++) {
+        for (var y = y1; y < y2; y++) {
+          tiles.drawTile(background.name, context, x, y);
+        }
+      }
+    })
   }
 }
 

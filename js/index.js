@@ -126,8 +126,6 @@ loadImage('img/RPG_path.png').then(image => {
 
   tiles.tile("grass", 1, 11);
   tiles.tile("stone", 1, 1);
-  tiles.tile("ege", 1, 12);
-  tiles.tile("water-ege", 1, 13);
   tiles.tile("water", 3, 10);
   tiles.object("boat", 0, 14, 4, 2);
 
@@ -161,8 +159,10 @@ loadImage('img/RPG_path.png').then(image => {
 
 
   tiles.tile("stone-grass_47", 0, 0);
+  tiles.tile("stone-grass_15", 0, 0);
 
   tiles.tile("stone-grass_151", 2, 0);
+  tiles.tile("stone-grass_23", 2, 0);
 
   tiles.tile("stone-grass_233", 0, 2);
 
@@ -173,6 +173,11 @@ loadImage('img/RPG_path.png').then(image => {
   tiles.tile("stone-grass_32", 1, 3);
   tiles.tile("stone-grass_4", 0, 4);
   tiles.tile("stone-grass_1", 1, 4);
+
+  tiles.object("water-grass_6", 1, 12, 1, 2);
+  tiles.object("water-grass_7", 1, 12, 1, 2);
+  tiles.object("water-grass_3", 1, 12, 1, 2);
+  tiles.object("water-grass_0", 3, 10);
 
   // const neighborhood = [
   //   [-1, -1], [0, -1], [1, -1],
@@ -209,7 +214,7 @@ function drawTiles(background, context, tiles) {
       makeEge(background.name, context, tiles, [x1, x2, y1, y2], curMatrix)
     })
     tiles.egemap.set(background.name, curMatrix)
-    console.log(tiles.egemap);
+    // console.log(tiles.egemap);
 
   } else {
 
@@ -239,14 +244,9 @@ function creatMatrix(x, y) {
 
 
 const neighborhood = [
-  [-1, -1],
-  [0, -1],
-  [1, -1],
-  [-1, 0],
-  [1, 0],
-  [-1, 1],
-  [0, 1],
-  [1, 1]
+  [-1, -1],[0, -1],[1, -1],
+  [-1, 0],         [1, 0],
+  [-1, 1],[0, 1],[1, 1]
 ];
 
 
@@ -256,20 +256,21 @@ function makeEge(type, context, tiles, [x1, x2, y1, y2], curMatrix) {
   for (var x = x1; x < x2; x++) {
     for (var y = y1; y < y2; y++) {
       for (var i = 0; i < neighborhood.length; i++) {
-        console.log((y + neighborhood[i][1]), (x + neighborhood[i][0]));
-        if (y + neighborhood[i][1] >= 0) {
-          if (curMatrix[y][x] == 1 && curMatrix[y + neighborhood[i][1]][x + neighborhood[i][0]] == 0) {
+        let curNeighborY = y + neighborhood[i][1];
+        let curNeighborX = x + neighborhood[i][0];
+        if (curNeighborY >= 0 && curNeighborX >= 0 && curNeighborY <= 16 && curNeighborX <= 16 && typeof curMatrix[curNeighborY] !== 'undefined') {
+          if (curMatrix[y][x] == 1 && curMatrix[curNeighborY][curNeighborX] == 0) {
 
             egeNum = egeNum + neighbor;
 
-            console.log(egeNum);
+            // console.log(egeNum);
 
           }
         }
         neighbor = neighbor * 2;
       }
       console.log(egeNum);
-      let curName = "stone-grass_" + egeNum;
+      let curName = type + "-grass_" + egeNum;
       tiles.drawTile(curName, context, x, y);
       egeNum = 0;
       neighbor = 1;

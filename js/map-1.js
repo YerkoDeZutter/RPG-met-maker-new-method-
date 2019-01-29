@@ -13,45 +13,31 @@ let backgrounds = [{
     "space": [
       [
         3, 13,
-        3, 13
+        2, 10
       ],
       [
         0, 16,
-        6, 10
+        7, 10
       ],
       [
         6, 10,
         0, 12
-      ]
+      ],[
+        1, 5,
+        1, 5
+      ],[
+        11, 15,
+        1, 5
+      ],
     ],
     "overlay": true
-  },
-  {
-    "name": "ege",
-    "space": [
-      [
-        0, 16,
-        13, 14
-      ]
-    ],
-    "overlay": false
-  },
-  {
-    "name": "water-ege",
-    "space": [
-      [
-        0, 16,
-        14, 15
-      ]
-    ],
-    "overlay": false
   },
   {
     "name": "water",
     "space": [
       [
         0, 16,
-        15, 16
+        12, 16
       ]
     ],
     "overlay": true

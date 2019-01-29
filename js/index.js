@@ -134,23 +134,51 @@ loadImage('img/RPG_path.png').then(image => {
 
 
   // ----- EGE'S -----
-
-  tiles.tile("stone-grass_-1_0", 0, 1);
-  tiles.tile("stone-grass_1_0", 2, 1);
-  tiles.tile("stone-grass_0_-1", 0, 0);
-  tiles.tile("stone-grass_0_1", 0, 2);
+  tiles.tile("stone-grass_0", 1, 1);
 
 
-  tiles.tile("stone-grass_-1_-1", 0, 0);
-  tiles.tile("stone-grass_1_-1", 2, 0);
-  tiles.tile("stone-grass_-1_1", 0, 2);
-  tiles.tile("stone-grass_1_1", 2, 2);
 
 
-  tiles.tile("grass-stone_-1_-1", 0, 3);
-  tiles.tile("grass-stone_1_-1", 1, 3);
-  tiles.tile("grass-stone_-1_1", 0, 4);
-  tiles.tile("grass-stone_1_1", 1, 4);
+  tiles.tile("stone-grass_41", 0, 1);
+  tiles.tile("stone-grass_40", 0, 1);
+  tiles.tile("stone-grass_9", 0, 1);
+
+  tiles.tile("stone-grass_148", 2, 1);
+  tiles.tile("stone-grass_144", 2, 1);
+  tiles.tile("stone-grass_20", 2, 1);
+
+  tiles.tile("stone-grass_7", 1, 0);
+  tiles.tile("stone-grass_6", 1, 0);
+  tiles.tile("stone-grass_3", 1, 0);
+
+  tiles.tile("stone-grass_224", 1, 2);
+  tiles.tile("stone-grass_192", 1, 2);
+  tiles.tile("stone-grass_96", 1, 2);
+
+
+
+
+
+
+  tiles.tile("stone-grass_47", 0, 0);
+
+  tiles.tile("stone-grass_151", 2, 0);
+
+  tiles.tile("stone-grass_233", 0, 2);
+
+  tiles.tile("stone-grass_244", 2, 2);
+
+
+  tiles.tile("stone-grass_128", 0, 3);
+  tiles.tile("stone-grass_32", 1, 3);
+  tiles.tile("stone-grass_4", 0, 4);
+  tiles.tile("stone-grass_1", 1, 4);
+
+  // const neighborhood = [
+  //   [-1, -1], [0, -1], [1, -1],
+  //   [-1, 0],           [1, 0],
+  //   [-1, 1],  [0, 1],  [1, 1]
+  // ];
 
   // ----- START PLACING TILE'S -----
 
@@ -178,10 +206,11 @@ function drawTiles(background, context, tiles) {
           tiles.drawTile(background.name, context, x, y);
         }
       }
+      makeEge(background.name, context, tiles, [x1, x2, y1, y2], curMatrix)
     })
     tiles.egemap.set(background.name, curMatrix)
     console.log(tiles.egemap);
-    
+
   } else {
 
     background.space.forEach(([x1, x2, y1, y2]) => {
@@ -196,7 +225,6 @@ function drawTiles(background, context, tiles) {
 
 
 
-
 function creatMatrix(x, y) {
   let matrix = [];
   while (y--) {
@@ -206,7 +234,48 @@ function creatMatrix(x, y) {
 }
 
 
-// let curMatrix = creatMatrix(4, 10);
+
+
+
+
+const neighborhood = [
+  [-1, -1],
+  [0, -1],
+  [1, -1],
+  [-1, 0],
+  [1, 0],
+  [-1, 1],
+  [0, 1],
+  [1, 1]
+];
+
+
+function makeEge(type, context, tiles, [x1, x2, y1, y2], curMatrix) {
+  let egeNum = 0;
+  let neighbor = 1;
+  for (var x = x1; x < x2; x++) {
+    for (var y = y1; y < y2; y++) {
+      for (var i = 0; i < neighborhood.length; i++) {
+        console.log((y + neighborhood[i][1]), (x + neighborhood[i][0]));
+        if (y + neighborhood[i][1] >= 0) {
+          if (curMatrix[y][x] == 1 && curMatrix[y + neighborhood[i][1]][x + neighborhood[i][0]] == 0) {
+
+            egeNum = egeNum + neighbor;
+
+            console.log(egeNum);
+
+          }
+        }
+        neighbor = neighbor * 2;
+      }
+      console.log(egeNum);
+      let curName = "stone-grass_" + egeNum;
+      tiles.drawTile(curName, context, x, y);
+      egeNum = 0;
+      neighbor = 1;
+    }
+  }
+}
 
 
 

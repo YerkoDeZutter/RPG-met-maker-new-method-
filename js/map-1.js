@@ -21,7 +21,7 @@ let backgrounds = [{
       ],
       [
         6, 10,
-        0, 13
+        0, 12
       ]
     ],
     "overlay": true

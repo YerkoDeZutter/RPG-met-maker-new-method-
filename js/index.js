@@ -38,6 +38,14 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 
 
+var tileMap = document.createElement("canvas");
+tileMap.width = 16*32;
+tileMap.height = 16*32;
+
+
+
+
+
 // ----- TILE CLASS -----
 
 class new_tile {
@@ -102,7 +110,8 @@ class new_tile {
 
   draw(name, context, x, y) {
     const tileblock = this.tilemap.get(name);
-    context.drawImage(tileblock, x, y);
+    context.getContext("2d").drawImage(tileblock, x, y);
+    MakeDrawMap(context)
   }
 
   // ----- PREPARE TO DRAW TILE -----
@@ -177,6 +186,8 @@ loadImage('img/RPG_path.png').then(image => {
   tiles.object("water-grass_6", 1, 12, 1, 2);
   tiles.object("water-grass_7", 1, 12, 1, 2);
   tiles.object("water-grass_3", 1, 12, 1, 2);
+
+
   tiles.object("water-grass_0", 3, 10);
 
   // const neighborhood = [
@@ -188,7 +199,7 @@ loadImage('img/RPG_path.png').then(image => {
   // ----- START PLACING TILE'S -----
 
   backgrounds.forEach(bg => {
-    drawTiles(bg, c, tiles)
+    drawTiles(bg, tileMap, tiles)
   })
 })
 
@@ -269,7 +280,7 @@ function makeEge(type, context, tiles, [x1, x2, y1, y2], curMatrix) {
         }
         neighbor = neighbor * 2;
       }
-      console.log(egeNum);
+      // console.log(egeNum);
       let curName = type + "-grass_" + egeNum;
       tiles.drawTile(curName, context, x, y);
       egeNum = 0;
@@ -299,3 +310,11 @@ function MakeGrid() {
 }
 
 // setTimeout(MakeGrid, 100);
+
+
+function MakeDrawMap(context) {
+  c.drawImage(context, 0, 0)
+}
+
+
+// setTimeout(MakeDrawMap, 1000);

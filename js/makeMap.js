@@ -313,7 +313,7 @@ function MakeGrid() {
 
 
 function MakeDrawMap(context) {
-  c.drawImage(context, 0, 0)
+  // c.drawImage(context, 0, 0)
 }
 
 

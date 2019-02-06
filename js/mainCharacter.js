@@ -37,6 +37,11 @@ class new_Character {
 loadImage('img/mainCharacter.png').then(image => {
 
   function update() {
+    if(dirX != 0 || dirY != 0){
+     player.position.x += dirX*5;
+     player.position.y += dirY*5;
+    }
+
     const characters = new new_Character(image);
 
     characters.character("main", 0, 11);
@@ -77,11 +82,6 @@ document.addEventListener('keydown', event => {
     dirY = 1;
   } else if (event.keyCode === 38) {
     dirY = -1;
-  }
-
-  if(dirX != 0 || dirY != 0){
-   player.position.x += dirX*10;
-   player.position.y += dirY*10;
   }
 
 });

@@ -1,15 +1,3 @@
-function loadImage(url) {
-  return new Promise(resolve => {
-    const image = new Image();
-    image.addEventListener('load', () => {
-      resolve(image);
-    });
-    image.src = url;
-  });
-}
-
-
-
 class new_Character {
   constructor(image) {
     this.image = image;
@@ -44,40 +32,38 @@ class new_Character {
 
 
 
+// ----- CHARACTER LOADER -----
+
+loadImage('img/mainCharacter.png').then(image => {
+
+  function update() {
+    const characters = new new_Character(image);
+
+    characters.character("main", 0, 11);
 
 
-  loadImage('img/mainCharacter.png').then(image => {
+    c.drawImage(tileMap, 0, 0);
 
-    function update() {
+    const mainChar = characters.charactermap.get("main");
 
-      // this.Px = player.position.x;
-      // this.Py = player.position.y;
+    c.drawImage(mainChar, player.position.x, player.position.y);
 
-      const characters = new new_Character(image);
+    requestAnimationFrame(update);
+  }
 
-      characters.character("main", 0, 11);
+  update()
 
-
-      c.drawImage(tileMap, 0, 0);
-
-      const mainChar = characters.charactermap.get("main");
-
-      c.drawImage(mainChar, player.position.x, player.position.y);
-
-      requestAnimationFrame(update);
-    }
-
-    // const mainChar = characters.charactermap.get("main");
-
-    // console.log(characters.charactermap);
-
-    update()
-
-    // c.drawImage(mainChar, 0, 0)
-
-  })
+})
 
 
+
+
+
+
+
+
+
+// ----- INPUTS -----
 
 document.addEventListener('keydown', event => {
   if (event.keyCode === 37) {
@@ -93,6 +79,8 @@ document.addEventListener('keydown', event => {
 
 
 
+
+// ----- PLAYER SETUP -----
 
 const player = {
   position: {

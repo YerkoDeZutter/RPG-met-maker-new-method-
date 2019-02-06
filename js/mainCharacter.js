@@ -45,55 +45,58 @@ class new_Character {
 
 
 
-setTimeout(loadImage('img/mainCharacter.png').then(image => {
 
-  const characters = new new_Character(image);
+  loadImage('img/mainCharacter.png').then(image => {
 
-  characters.character("main", 0, 11);
+    function update() {
 
-  // const mainChar = characters.charactermap.get("main");
+      // this.Px = player.position.x;
+      // this.Py = player.position.y;
 
-  console.log(characters.charactermap);
+      const characters = new new_Character(image);
 
-  // c.drawImage(mainChar, 0, 0)
-
-  update(characters)
-
-}), 100)
+      characters.character("main", 0, 11);
 
 
-function update(characters) {
+      c.drawImage(tileMap, 0, 0);
 
-  // this.Px = player.position.x;
-  // this.Py = player.position.y;
+      const mainChar = characters.charactermap.get("main");
 
+      c.drawImage(mainChar, player.position.x, player.position.y);
 
-  c.drawImage(tileMap, 0, 0);
+      requestAnimationFrame(update);
+    }
 
-  const mainChar = characters.charactermap.get("main");
+    // const mainChar = characters.charactermap.get("main");
 
-  c.drawImage(mainChar, 0, 0);
+    // console.log(characters.charactermap);
 
-  requestAnimationFrame(update(characters));
-}
+    update()
+
+    // c.drawImage(mainChar, 0, 0)
+
+  })
 
 
 
 document.addEventListener('keydown', event => {
-    if (event.keyCode === 37) {
-        player.position.x -= 10;
-    } else if (event.keyCode === 39) {
-        player.position.x += 10
-    } else if (event.keyCode === 40) {
-        player.position.y += 10
-    } else if (event.keyCode === 38) {
-        player.position.y -= 10
-    }
+  if (event.keyCode === 37) {
+    player.position.x -= 10;
+  } else if (event.keyCode === 39) {
+    player.position.x += 10
+  } else if (event.keyCode === 40) {
+    player.position.y += 10
+  } else if (event.keyCode === 38) {
+    player.position.y -= 10
+  }
 });
 
 
 
 
 const player = {
-  position : {x : 0, y : 0}
+  position: {
+    x: 0,
+    y: 0
+  }
 }

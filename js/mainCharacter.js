@@ -61,9 +61,15 @@ loadImage('img/mainCharacter.png').then(image => {
 
     c.drawImage(tileMap, 0, 0);
 
-    const mainChar = characters.charactermap.get("main");
+    const mainCharImg = characters.charactermap.get("main");
 
-    c.drawImage(mainChar, player.position.x, player.position.y);
+    const mainChar = c.drawImage(mainCharImg, player.position.x, player.position.y);
+
+    if (player.position.x <= 0 || player.position.x >= 14 * 32) {
+      dirX = 0;
+    } else if (player.position.y <= 0 || player.position.y >= 14 * 32) {
+      dirY = 0;
+    }
 
     requestAnimationFrame(update);
   }
@@ -85,18 +91,36 @@ let aniCount = 0;
 let aniSpeed = ((aniFrameList[1].frames.length - 1) * 10);
 
 function aniFrames() {
-  if(aniCount <= aniSpeed){
+  if (aniCount <= aniSpeed) {
     aniCount++
   } else {
     aniCount = 0;
   }
   // console.log(Math.floor(aniCount/20));
   if (dirX != 0 || dirY != 0) {
-    aniPicker = aniFrameList[1].frames[Math.floor(aniCount/10)]
+    aniPicker = aniFrameList[1].frames[Math.floor(aniCount / 10)]
   } else {
     aniPicker = [0, 11]
   }
   return aniPicker
+}
+
+
+
+
+
+
+
+
+
+// ----- COLITION -----
+
+function celitionDitec() {
+  if (true) {
+
+  } else {
+
+  }
 }
 
 
@@ -114,16 +138,16 @@ let dirY = 0;
 let dirSprite = 11;
 
 document.addEventListener('keydown', event => {
-  if (event.keyCode === 37) {
+  if (event.keyCode === 37 && player.position.x > 0) {
     dirX = -1;
     dirSprite = 9;
-  } else if (event.keyCode === 39) {
+  } else if (event.keyCode === 39 && player.position.x < 14 * 32) {
     dirX = 1;
     dirSprite = 11;
-  } else if (event.keyCode === 40) {
+  } else if (event.keyCode === 40 && player.position.y < 14 * 32) {
     dirY = 1;
     dirSprite = 10;
-  } else if (event.keyCode === 38) {
+  } else if (event.keyCode === 38 && player.position.y > 0) {
     dirY = -1;
     dirSprite = 8;
   }

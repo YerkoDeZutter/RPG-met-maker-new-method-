@@ -52,6 +52,12 @@ loadImage('img/mainCharacter.png').then(image => {
     if (dirX != 0 || dirY != 0) {
       player.position.x += dirX * 2;
       player.position.y += dirY * 2;
+
+      if(dirX != 0){
+        dirSprite = 10 + dirX
+      } else {
+        dirSprite = 9 + dirY
+      }
     }
 
     const characters = new new_Character(image);
@@ -133,23 +139,20 @@ function celitionDitec() {
 
 // ----- INPUTS -----
 
-let dirX = 0;
+let dirX = 0
+;
 let dirY = 0;
 let dirSprite = 11;
 
 document.addEventListener('keydown', event => {
   if (event.keyCode === 37 && player.position.x > 0) {
     dirX = -1;
-    dirSprite = 9;
   } else if (event.keyCode === 39 && player.position.x < 14 * 32) {
     dirX = 1;
-    dirSprite = 11;
   } else if (event.keyCode === 40 && player.position.y < 14 * 32) {
     dirY = 1;
-    dirSprite = 10;
   } else if (event.keyCode === 38 && player.position.y > 0) {
     dirY = -1;
-    dirSprite = 8;
   }
 
 });

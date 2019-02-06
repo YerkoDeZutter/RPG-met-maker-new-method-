@@ -65,16 +65,38 @@ loadImage('img/mainCharacter.png').then(image => {
 
 // ----- INPUTS -----
 
+let dirX = 0;
+let dirY = 0;
+
 document.addEventListener('keydown', event => {
   if (event.keyCode === 37) {
-    player.position.x -= 10;
+    dirX = -1;
   } else if (event.keyCode === 39) {
-    player.position.x += 10
+    dirX = 1;
   } else if (event.keyCode === 40) {
-    player.position.y += 10
+    dirY = 1;
   } else if (event.keyCode === 38) {
-    player.position.y -= 10
+    dirY = -1;
   }
+
+  if(dirX != 0 || dirY != 0){
+   player.position.x += dirX*10;
+   player.position.y += dirY*10;
+  }
+
+});
+
+document.addEventListener('keyup', event => {
+  if (event.keyCode === 37) {
+    dirX = 0;
+  } else if (event.keyCode === 39) {
+    dirX = 0;
+  } else if (event.keyCode === 40) {
+    dirY = 0;
+  } else if (event.keyCode === 38) {
+    dirY = 0;
+  }
+
 });
 
 

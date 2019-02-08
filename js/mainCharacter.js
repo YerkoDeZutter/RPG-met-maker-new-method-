@@ -71,11 +71,14 @@ loadImage('img/mainCharacter.png').then(image => {
 
     const mainChar = c.drawImage(mainCharImg, player.position.x, player.position.y);
 
-    if (player.position.x <= 0 || player.position.x >= 14 * 32) {
+    if (player.position.x < 0 || player.position.x > 14 * 32) {
       dirX = 0;
-    } else if (player.position.y <= 0 || player.position.y >= 14 * 32) {
+    }
+    if (player.position.y < 0 || player.position.y > 14 * 32) {
       dirY = 0;
     }
+
+    celitionDitec(player.position.x, (10*32), player.position.y, (8*32))
 
     requestAnimationFrame(update);
   }
@@ -121,11 +124,20 @@ function aniFrames() {
 
 // ----- COLITION -----
 
-function celitionDitec() {
-  if (true) {
+function celitionDitec(x1, x2, y1, y2) {
 
+  let distansX = x1 - x2;
+  let distansY = y1 - y2;
+
+  let fillME = Math.sqrt(Math.pow(distansX, 2) + Math.pow(distansY, 2))
+
+  // console.log(fillME - 64);
+
+  if (fillME > 64) {
+    return true
   } else {
-
+    dirX = 0;
+    dirY = 0;
   }
 }
 

@@ -39,8 +39,8 @@ c.fillRect(0, 0, canvas.width, canvas.height);
 
 
 var tileMap = document.createElement("canvas");
-tileMap.width = 16*32;
-tileMap.height = 16*32;
+tileMap.width = 16 * 32;
+tileMap.height = 16 * 32;
 
 
 
@@ -188,7 +188,7 @@ loadImage('img/RPG_path.png').then(image => {
   tiles.object("water-grass_3", 1, 12, 1, 2);
 
 
-  tiles.object("water-grass_0", 3, 10);
+  tiles.object("water-grass_0", 3, 10, 1, 1);
 
   // const neighborhood = [
   //   [-1, -1], [0, -1], [1, -1],
@@ -280,9 +280,11 @@ function makeEge(type, context, tiles, [x1, x2, y1, y2], curMatrix) {
         }
         neighbor = neighbor * 2;
       }
-      // console.log(egeNum);
-      let curName = type + "-grass_" + egeNum;
-      tiles.drawTile(curName, context, x, y);
+      if (egeNum != 0) {
+        // console.log(egeNum);
+        let curName = type + "-grass_" + egeNum;
+        tiles.drawTile(curName, context, x, y);
+      }
       egeNum = 0;
       neighbor = 1;
     }

@@ -146,7 +146,7 @@ function celitionDitec(x1, x2, y1, y2, hitSizeX, hitSizeY) {
     // Math.abs(disX) >= Math.abs(disY)
     // x2 - (x1 + 50) < y2 - (y1 + 50) || x1 - (x2 + hitSizeX) > y1 - (y2 + hitSizeY)
 
-    if ((x2 - (x1 + 64) < 1 && x2 - (x1 + 64) > -10) || (x1 - (x2 + hitSizeX) < 1 && x1 - (x2 + hitSizeX) > -10)) {
+    if ((x2 - (x1 + 64) < 1 && x2 - (x1 + 64) > -15) || (x1 - (x2 + hitSizeX) < 1 && x1 - (x2 + hitSizeX) > -15)) {
 
       // c.fillStyle = "#255";
       // c.fillRect(250, 400, 100, 100);
@@ -160,7 +160,7 @@ function celitionDitec(x1, x2, y1, y2, hitSizeX, hitSizeY) {
 
     // Math.abs(disX) <= Math.abs(disY)
 
-    if ((y2 - (y1 + 64) < 1 && y2 - (y1 + 64) > -10) || (y1 - (y2 + hitSizeY) < -32 && y1 - (y2 + hitSizeY) > -42)) {
+    if ((y2 - (y1 + 64) < 1 && y2 - (y1 + 64) > -15) || (y1 - (y2 + hitSizeY) < -32 && y1 - (y2 + hitSizeY) > -42)) {
 
       // c.fillStyle = "#fff255";
       // c.fillRect(150, 400, 100, 100);

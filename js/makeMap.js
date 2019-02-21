@@ -137,6 +137,7 @@ loadImage('img/RPG_path.png').then(image => {
   tiles.tile("stone", 1, 1);
   tiles.tile("water", 3, 10);
   tiles.object("boat", 0, 14, 4, 2);
+  tiles.object("market", 12, 0, 2, 3);
 
 
 
@@ -311,7 +312,7 @@ function MakeGrid() {
 
 }
 
-// setTimeout(MakeGrid, 100);
+setTimeout(MakeGrid, 100);
 
 
 function MakeDrawMap(context) {

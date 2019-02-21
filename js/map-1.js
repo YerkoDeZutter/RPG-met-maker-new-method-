@@ -1,4 +1,4 @@
-let backgrounds = [{
+const backgrounds = [{
     "name": "grass",
     "space": [
       [
@@ -51,5 +51,45 @@ let backgrounds = [{
       ]
     ],
     "overlay": false
+  },
+  {
+    "name": "market",
+    "space": [
+      [
+        13, 14,
+        4, 5
+      ]
+    ],
+    "overlay": false
+  }
+]
+
+
+
+
+
+
+
+
+const colitionBoxxes = [
+  {
+    "type": "stop",
+    "why": "watter",
+    "space": [
+      [
+        0, 16,
+        13, 3
+      ]
+    ]
+  },
+  {
+    "type": "stop",
+    "why": "market",
+    "space": [
+      [
+        14, 2,
+        4, 3
+      ]
+    ]
   }
 ]

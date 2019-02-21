@@ -49,17 +49,6 @@ loadImage('img/mainCharacter.png').then(image => {
 
     // console.log(deltaFrame);
 
-    if (dirX != 0 || dirY != 0) {
-      player.position.x += dirX * 2;
-      player.position.y += dirY * 2;
-
-      if(dirX != 0){
-        dirSprite = 10 + dirX
-      } else {
-        dirSprite = 9 + dirY
-      }
-    }
-
     const characters = new new_Character(image);
 
     characters.character("main", aniFrames()[0], dirSprite);
@@ -71,14 +60,21 @@ loadImage('img/mainCharacter.png').then(image => {
 
     const mainChar = c.drawImage(mainCharImg, player.position.x, player.position.y);
 
-    if (player.position.x < 0 || player.position.x > 14 * 32) {
-      dirX = 0;
-    }
-    if (player.position.y < 0 || player.position.y > 14 * 32) {
-      dirY = 0;
-    }
+    colitionBoxxes.forEach(Hbox=>{
 
-    celitionDitec(player.position.x, (10*32), player.position.y, (8*32))
+      celitionDitec(player.position.x, (Hbox.space[0][0] * 32), player.position.y, (Hbox.space[0][2] * 32), (Hbox.space[0][1] * 32), (Hbox.space[0][3] * 32));
+
+    })
+
+    // celitionDitec(player.position.x, (0 * 32), player.position.y, (13 * 32), (16 * 32), (3 * 32));
+    // celitionDitec(player.position.x, (14 * 32), player.position.y, (4 * 32), (12 * 32), (3 * 32));
+
+    playerMove()
+
+    dirXmov = 0;
+    dirYmov = 0;
+
+    // MakeGrid()
 
     requestAnimationFrame(update);
   }
@@ -124,21 +120,94 @@ function aniFrames() {
 
 // ----- COLITION -----
 
-function celitionDitec(x1, x2, y1, y2) {
+let dirXmov = 0;
+let dirYmov = 0;
 
-  let distansX = x1 - x2;
-  let distansY = y1 - y2;
+function celitionDitec(x1, x2, y1, y2, hitSizeX, hitSizeY) {
 
-  let fillME = Math.sqrt(Math.pow(distansX, 2) + Math.pow(distansY, 2))
 
-  // console.log(fillME - 64);
+  let x1mid = x1 + (50 / 2); //calculate middle of 1st object
+  let y1mid = y1 + (50 / 2);
 
-  if (fillME > 64) {
-    return true
-  } else {
+  let x2mid = x2 + (hitSizeX / 2); //calculate middle of 2nd object
+  let y2mid = y2 + (hitSizeY / 2);
+
+
+
+
+  // Math.abs(disX) < (50 + hitSizeX) / 2 && Math.abs(disY) < (50 + hitSizeY) / 2
+
+  if (x2 <= (x1 + 64) && x1 <= (x2 + hitSizeX) && y2 <= (y1 + 64) && y1 <= (y2 + hitSizeY) - 32) {
+
+    // c.fillStyle = "#255";
+    // c.fillRect(250, 0, 100, 100);
+
+
+    // Math.abs(disX) >= Math.abs(disY)
+    // x2 - (x1 + 50) < y2 - (y1 + 50) || x1 - (x2 + hitSizeX) > y1 - (y2 + hitSizeY)
+
+    if ((x2 - (x1 + 64) < 1 && x2 - (x1 + 64) > -10) || (x1 - (x2 + hitSizeX) < 1 && x1 - (x2 + hitSizeX) > -10)) {
+
+      // c.fillStyle = "#255";
+      // c.fillRect(250, 400, 100, 100);
+
+      if (x1mid < x2mid) {
+        dirXmov = 1;
+      } else if (x1mid > x2mid) {
+        dirXmov = -1;
+      }
+    }
+
+    // Math.abs(disX) <= Math.abs(disY)
+
+    if ((y2 - (y1 + 64) < 1 && y2 - (y1 + 64) > -10) || (y1 - (y2 + hitSizeY) < -32 && y1 - (y2 + hitSizeY) > -42)) {
+
+      // c.fillStyle = "#fff255";
+      // c.fillRect(150, 400, 100, 100);
+
+      if (y1mid < y2mid) {
+        dirYmov = 1;
+      } else if (y1mid > y2mid) {
+        dirYmov = -1;
+      }
+
+    }
+
+  }
+
+  // playerMove()
+
+}
+
+
+
+
+
+// ----- PLAYER MOVEMENT -----
+
+
+function playerMove() {
+
+  if (dirX != 0 || dirY != 0) {
+    let movSpeed = 2;
+
+    player.position.x += (dirX * movSpeed - dirXmov * movSpeed);
+    player.position.y += (dirY * movSpeed - dirYmov * movSpeed);
+
+    if (dirX != 0) {
+      dirSprite = 10 + dirX
+    } else {
+      dirSprite = 9 + dirY
+    }
+  }
+
+  if (player.position.x < 0 || player.position.x > 14 * 32) {
     dirX = 0;
+  }
+  if (player.position.y < 0 || player.position.y > 14 * 32) {
     dirY = 0;
   }
+
 }
 
 
@@ -151,8 +220,7 @@ function celitionDitec(x1, x2, y1, y2) {
 
 // ----- INPUTS -----
 
-let dirX = 0
-;
+let dirX = 0;
 let dirY = 0;
 let dirSprite = 11;
 
@@ -192,4 +260,35 @@ const player = {
     x: 0,
     y: 0
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function MakeGrid() {
+  for (var i = 0; i < canvas.height / blockSize; i++) {
+    for (var j = 0; j < canvas.width / blockSize; j++) {
+      c.strokeRect(i * blockSize, j * blockSize, blockSize, blockSize);
+      c.fillText("  " + i, i * blockSize, (j * blockSize - 20) + blockSize);
+      c.fillText("  " + j, i * blockSize, (j * blockSize) + blockSize);
+      c.font = "15px Arial";
+    }
+  }
+
 }
